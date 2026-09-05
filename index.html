@@ -6,7 +6,7 @@
 
     <title>Checkup Booking System รพ.จันทรุเบกษา</title>
 
-    <style>
+   <style>
         * {
             box-sizing: border-box;
         }
@@ -31,14 +31,10 @@
 
         iframe {
             position: absolute;
-            top: 0 px;
+            top: 0;
             left: 0;
-
             width: 100%;
-
-            /* สำคัญ: ไม่ขยาย iframe ด้านล่าง */
-            height: calc(100dvh + 45px);
-
+            height: 100%; /* เปลี่ยนจาก calc(100dvh + 45px) เป็น 100% */
             border: none;
             display: block;
         }
@@ -50,17 +46,16 @@
 
             .iframe-container {
                 height: 100dvh;
-                height: 100svh;
             }
 
             iframe {
-               top: env(safe-area-inset-top, 0 px); /* ปรับเป็น 0 เพื่อให้เห็นขอบบนเต็ม หรือปรับระยะตามชอบ */
-        
-                /*
-                 * ขยายเฉพาะด้านบน
-                 * แต่ให้ด้านล่างจบพอดีกับหน้าจอ
-                 */
-                height: calc(100svh + 45px);
+                /* เว้นระยะรอยบากด้านบน */
+                top: env(safe-area-inset-top, 0px);
+                left: 0;
+                width: 100%;
+
+                /* คำนวณความสูงให้พอดีหน้าจอ หักระยะขอบบนและแถบควบคุมด้านล่าง */
+                height: calc(100dvh - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px));
             }
         }
     </style>
