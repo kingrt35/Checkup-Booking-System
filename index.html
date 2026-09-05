@@ -6,7 +6,7 @@
 
     <title>Checkup Booking System รพ.จันทรุเบกษา</title>
 
-   <style>
+    <style>
         * {
             box-sizing: border-box;
         }
@@ -17,24 +17,25 @@
             padding: 0;
             width: 100%;
             height: 100%;
-            overflow: hidden;
+            /* อนุญาตให้เลื่อนแนวตั้งได้ แต่ล็อกไม่ให้เลื่อนซ้าย-ขวา */
+            overflow-x: hidden;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
             background-color: #1e3a8a;
         }
 
         .iframe-container {
-            position: fixed;
-            inset: 0;
             width: 100%;
-            height: 100dvh;
-            overflow: hidden;
+            min-height: 100dvh;
+            /* เว้นระยะปลอดภัยด้านล่างสำหรับ Home bar ของมือถือ */
+            padding-bottom: env(safe-area-inset-bottom, 20px);
+            display: flex;
         }
 
         iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
             width: 100%;
-            height: 100%; /* เปลี่ยนจาก calc(100dvh + 45px) เป็น 100% */
+            /* ให้ iframe ขยายเต็มพื้นที่ความสูง หรือยืดตามเนื้อหา */
+            min-height: 100dvh;
             border: none;
             display: block;
         }
@@ -43,19 +44,9 @@
            Mobile
            ========================= */
         @media (max-width: 768px) {
-
             .iframe-container {
-                height: 100dvh;
-            }
-
-            iframe {
-                /* เว้นระยะรอยบากด้านบน */
-                top: env(safe-area-inset-top, 0px);
-                left: 0;
-                width: 100%;
-
-                /* คำนวณความสูงให้พอดีหน้าจอ หักระยะขอบบนและแถบควบคุมด้านล่าง */
-                height: calc(100dvh - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px));
+                /* เพิ่มระยะ padding ด้านล่างกันเมนูจม */
+                padding-bottom: calc(env(safe-area-inset-bottom, 0px) + 30px);
             }
         }
     </style>
@@ -64,12 +55,10 @@
 <body>
 
     <div class="iframe-container">
-
         <iframe
             src="https://script.google.com/macros/s/AKfycbyykQfTMHOPSpHkdZJWZJAI08ERlBmX8acuCOcojcpooKv0IGrcmdSSU6QeakvWDP8_-g/exec"
             allow="clipboard-write">
         </iframe>
-
     </div>
 
 </body>
